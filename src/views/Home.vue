@@ -2,30 +2,43 @@
   <div class="home">
     <!-- <my-icon id="icon-yonghu" color="text-secondary" :size="28"></my-icon> -->
     <div class="wrapper">
+      <slideBar id="icon-wangluo" color="text-warning" :size="40">
+        Welcome to here
+      </slideBar>
       <div>
-        <my-icon id="icon-wangluo" color="text-warning" :size="45" class="network"></my-icon>
-        <div class="text">Welcome to here</div>
+        <contentBar>
+          <template #title>
+            I'M
+          </template>
+          <template #desc>
+            your father
+          </template>
+          <template #visit>
+            访客总量:
+          </template>
+        </contentBar>
       </div>
-      <div>
-        <div class="content-head">
-          <div>
-            <h1>I'M</h1>
-            <h1>your father</h1>
-          </div>
-          <h6>访客人数:</h6>
-        </div>
-      </div>
-      <img src="../assets/images/panda.jpg" alt="" class="user-profile img-thumbnail">
+      <!-- 组件位置 -->
+      <userProfile :src="src"></userProfile>
     </div>
   </div>
 </template>
 
 <script>
+import userProfile from "@/components/user-profile/user-profile.vue";
+import slideBar from "@/components/slide-bar/slide-bar.vue";
+import contentBar from "@/components/content-bar/content-bar.vue";
 export default {
   name: 'Home',
   setup () {
     return {
+      src: require('../assets/images/panda.jpg')
     }
+  },
+  components: {
+    userProfile,
+    slideBar,
+    contentBar
   }
 }
 </script>
@@ -44,29 +57,6 @@ export default {
     position: absolute;
     left: calc(50% - 95vw / 2);
     top: calc(50% - 90vh / 2);
-    .user-profile {
-      min-width: 350px;
-      height: 90vh;
-    }
-    .network {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 4vw;
-      height: 10vh;
-    }
-    .text {
-      width: 4vw;
-      height: 80vh;
-      font-size: 30px;
-      color: rgb(255, 191, 141);
-      background-color: rgba(52,57,92,.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      // 文字纵向排列
-      writing-mode: vertical-lr;
-    }
     .content-head {
       width: 100%;
       height: 20vh;
