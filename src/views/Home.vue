@@ -2,37 +2,63 @@
   <div class="home">
     <!-- <my-icon id="icon-yonghu" color="text-secondary" :size="28"></my-icon> -->
     <div class="wrapper">
-      <slideBar id="icon-wangluo" color="text-warning" :size="40">
+      <slide-bar id="icon-wangluo" color="text-warning" :size="40">
         Welcome to here
-      </slideBar>
-      <div>
-        <contentBar>
+      </slide-bar>
+      <div class="w-100">
+        <content-bar>
           <template #title>
-            I'M
+            {{title}}
           </template>
           <template #desc>
-            your father
+            {{des}}
           </template>
           <template #visit>
-            访客总量:
+            访客总量:0
           </template>
-        </contentBar>
+        </content-bar>
+        <!-- 过渡动画 -->
+        <transition enter-active-class="animate__animated animate__zoomIn">
+          <router-view></router-view>
+        </transition>
       </div>
       <!-- 组件位置 -->
-      <userProfile :src="src"></userProfile>
+      <user-profile :src="src"></user-profile>
     </div>
   </div>
 </template>
 
 <script>
+import { pathToSign } from "../lib/router-lib.js";
 import userProfile from "@/components/user-profile/user-profile.vue";
 import slideBar from "@/components/slide-bar/slide-bar.vue";
 import contentBar from "@/components/content-bar/content-bar.vue";
 export default {
   name: 'Home',
   setup () {
+    // const router = useRouter()
+    // const title = ref("I'M")
+    // const des = ref("")
+    // watch(router.currentRoute, ({ path, name}) => {
+    //   const condition = path === "/" ? "I'M" : '';
+    //   const condition_2 = path === "/" ? "Mark" : name;
+    //   title.value = condition
+    //   des.value = condition_2
+    // },{
+    //   immediate: true
+    // })
+    // watchEffect(() => {
+    //   const { path, name} = router.currentRoute.value
+    //   const condition = path === "/" ? "I'M" : '';
+    //   const condition_2 = path === "/" ? "Mark" : name;
+    //   title.value = condition
+    //   des.value = condition_2
+    // })
+    const { title, des } = pathToSign()
     return {
-      src: require('../assets/images/panda.jpg')
+      src: require('../assets/images/panda.jpg'),
+      title,
+      des
     }
   },
   components: {
@@ -74,6 +100,9 @@ export default {
         }
       }
     }
+  }
+  .w-100 {
+    width: 100%;
   }
 }
 </style>
